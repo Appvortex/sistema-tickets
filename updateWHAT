@@ -1,0 +1,16 @@
+#!/bin/bash
+echo "Updating Chat Studio3D please wait."
+
+cd backend
+npm install -f
+rm -rf dist
+npm run build
+npx sequelize db:migrate
+npx sequelize db:seed
+cd ../frontend
+npm install -f
+rm -rf build
+npm run build
+pm2 restart all
+
+echo "Update finished. Enjoy!"
